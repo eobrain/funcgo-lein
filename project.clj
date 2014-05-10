@@ -1,7 +1,7 @@
-(defproject fgoc "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject org.eamonn.funcgo/funcgo-lein-plugin "0.2.0"
+  :description "Leiningen plugin to compile Functional Go to Clojure"
+  :url "http://funcgo.org"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[funcgo/funcgo "0.1.23"]]
+  :dependencies [[org.eamonn.funcgo/funcgo-compiler "0.2.1"]]
   :eval-in-leiningen true)
