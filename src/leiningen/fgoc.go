@@ -39,8 +39,8 @@ func dirs(project) {
 // Compile Functional Go files in the project. (entry point into the plugin)
 func fgoc(project, args...) {
 	const (
-		opts    = func{first(..) == '-'} filter args
-		nonOpts = func{first(..) != '-'} filter args
+		opts    = func{first($1) == '-'} filter args
+		nonOpts = func{first($1) != '-'} filter args
 		roots = opts concat (if seq(nonOpts) {
 			nonOpts
 		} else {
