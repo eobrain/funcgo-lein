@@ -32,17 +32,17 @@ func dirs(project) {
 	}
 	childRoots := for [_, v] := lazy project if isMap(v) { dirs(v) }
 
-	roots concat childRoots
+	roots  concat  childRoots
 }
 
 // Compile Functional Go files in the project. (entry point into the plugin)
 func fgoc(project, args...) {
-	opts    := func{first($1) == '-'} filter args
-	nonOpts := func{first($1) != '-'} filter args
-	roots   := opts concat (if seq(nonOpts) {
+	opts    := func{first($1) == '-'}  filter  args
+	nonOpts := func{first($1) != '-'}  filter  args
+	roots   := opts  concat  (if seq(nonOpts) {
 		nonOpts
 	} else {
-		set(func(path){io.file(path)->getAbsolutePath()} map flatten(dirs(project)))
+		set(func(path){io.file(path)->getAbsolutePath()}  map  flatten(dirs(project)))
 	})
 
 	eval.evalInProject(project,
