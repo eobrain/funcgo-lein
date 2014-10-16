@@ -1,0 +1,25 @@
+#!/bin/sh
+
+PROJECT=funcgo-lein
+
+if [ $# != 1 ]; then
+    echo "USAGE:    $0 tag"
+    exit 1
+fi
+tag=$1
+
+dir=/tmp/deploy-$PROJECT-$$
+mkdir -p $dir
+cp ../funcgo/bin/funcgo-compiler-$tag-standalone.jar $dir
+
+set -x
+cd $dir
+git clone git@github.com:eobrain/$PROJECT.git
+cd $PROJECT
+git pull --tags
+git checkout $tag
+git status
+java -jar ../funcgo-compiler-$tag-standalone.jar -f src/
+
+read -p "<ENTER> to deploy, or <CTRL>-C to abort" dummy
+lein deploy clojars
